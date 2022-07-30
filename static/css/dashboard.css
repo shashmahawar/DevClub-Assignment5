@@ -1,0 +1,302 @@
+#student_nav {
+    position: fixed;
+    left: 0;
+    top: 12vh;
+    overflow: hidden;
+    height: 77%;
+    width: 20%;
+    border-right: 1px solid #D9D9D9;
+}
+
+#student_nav ul {
+    display: flex;
+    list-style: none;
+    flex-direction: column;
+    margin: auto;
+    margin-left: 25%;
+}
+
+#student_nav ul li, #logout {
+    text-transform: uppercase;
+    font-size: 1.5vw;
+    font-weight: 500;
+    margin-top: 2.4vh;
+    margin-bottom: 4vh;
+}
+
+#logout {
+    margin-left: 25%;
+    position: absolute;
+    bottom: 3vh;
+}
+
+#student_nav ul li a, #student_nav a {
+    text-decoration: none;
+    color: black;
+    transition: 0.25s;
+}
+
+.active_student_nav {
+    color: #00758F !important;
+}
+
+#student_nav ul li a:hover, #student_nav a:hover {
+    color: #00758F;
+}
+
+#student_dashboard {
+    margin-left: 22%;
+    margin-top: 10vh;
+}
+
+#student_dashboard h1 {
+    font-weight: 500;
+    font-size: 2rem;
+}
+
+#dashboard_start {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3vh;
+}
+
+#main_dashboard {
+    width: 65%;
+}
+
+#semester_grades {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 25px;
+    background-color: white;
+    display: flex;
+}
+
+#sem_graph {
+    width: 70%;
+}
+
+#sem_graph h2 {
+    font-weight: 500;
+    font-size: 1.4rem;
+    padding: 1rem 1.4rem 0 1.4rem;
+}
+
+#sem_graph canvas {
+    padding: 1rem 1.4rem 1rem 1.4rem;
+}
+
+#sem_overall {
+    width: 30%;
+    background-color: #00758F;
+    border-radius: 0 25px 25px 0;
+    padding: 2rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.overall_heading {
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.2rem;
+    line-height: 10px;
+}
+
+.overall_content {
+    font-weight: 500;
+    color: white;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+}
+
+#my_courses {
+    margin-top: 5vh;
+    position: relative;
+}
+
+#my_courses h2 {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+#see_all_courses {
+    color: #00758F;
+    font-size: 1rem;
+    position: absolute;
+    right: 0;
+}
+
+#course_cards {
+    display: flex;
+    margin-top: 4vh;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.my_course_card {
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 25px;
+    width: 40%;
+    height: fit-content;
+    padding: 0.5rem 1.4rem;
+}
+
+.course_name {
+    height: 40%;
+    display: flex;
+    border-bottom: 1px solid #D9D9D9;
+    align-items: center;
+    padding-top: 1.5vh;
+    padding-bottom: 1.5vh;
+}
+
+.course_name img {
+    height: 3rem;
+    margin-right: 5%;
+}
+
+.course_code {
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.course_prof {
+    font-weight: 400;
+    font-size: 0.8rem;
+}
+
+.course_prof i {
+    color: #D9D9D9;
+    width: 1rem;
+}
+
+.course_details {
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.course_details table {
+    width: 100%;
+}
+
+.course_details table tr td {
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 0.6rem 0.3rem;
+}
+
+.course_details table tr td i {
+    color: #D9D9D9;
+}
+
+.view_course {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+.view_course a {
+    text-decoration: none;
+    color: #00758F;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+#upcoming_assignments {
+    margin-top: 5vh;
+}
+
+#upcoming_assignments h2 {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+#upcoming_assignments table {
+    width: 100%;
+    margin-top: 3vh;
+}
+
+#upcoming_assignments table tr td, #upcoming_assignments table tr th {
+    border: 1px solid #00758F;
+    text-align: center;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
+
+#upcoming_assignments table tr th {
+    color: rgba(0,0,0,0.6);
+    font-weight: 500;
+}
+
+#upcoming_assignments table tr td {
+    font-weight: 400;
+}
+
+.assignment_link {
+    color: #00758F;
+}
+
+#side_menu {
+    width: 25%;
+    margin-right: 6.4%;
+}
+
+#announcements, #online_now {
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+    border-radius: 25px;
+    padding: 1rem 1.4rem;
+    margin-bottom: 5vh;
+}
+
+#announcements h2, #online_now h2 {
+    font-weight: 600;
+    font-size: 1.5vw;
+    text-align: center;
+    margin-bottom: 1vh;
+}
+
+#announcements p {
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+}
+
+.announcement {
+    color: #00758F;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+#see_more_announce {
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.2vw;
+    margin-bottom: 2vh !important;
+    margin-top: 4vh !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#see_more_announce a {
+    text-decoration: none;
+    color: black;
+}
+
+.user_online {
+    display: flex;
+    justify-content: space-between;
+    color: #00758F;
+    margin-top: 1vh;
+}
+
+.user_online a {
+    text-decoration: none;
+    color: #00758F;
+}

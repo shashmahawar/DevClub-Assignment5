@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/edit_grades.css' %}">
+{% endblock head %}
+
+{% block title %}Edit Grades - {{course.code}}{% endblock title %}
+
+{% block main %}
+<div id="student_dashboard">
+    <h1>{{course.code}} - Edit Grades</h1>
+    <div id="dashboard_start">
+        <div id="main_dashboard">
+            <table class="participant">
+                <tr>
+                    <td>Name</td>
+                    <td>{{student.name}}</td>
+                </tr>
+                <tr>
+                    <td>Username</td>
+                    <td>{{student.username}}</td>
+                </tr>
+                <tr>
+                    <td>Grade</td>
+                    <td>
+                        <form action="/manage/{{course.semester_code}}-{{course.code}}/grades/{{student.username}}/edit" method="post">
+                            {% csrf_token %}
+                            <input type="text" name="grade" placeholder="Grade" value="{{grade}}" required>
+                            <button type="submit">Save</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock main %}

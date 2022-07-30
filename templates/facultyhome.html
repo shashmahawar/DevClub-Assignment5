@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/facultyhome.css' %}">
+{% endblock head %}
+
+{% block main %}
+<h1>Hello, {{profile.name}} 👋</h1>
+<div class="manage_courses">
+    <h2>Manage Courses</h2>
+    <div class="scroll_bar">
+        {% if not present_courses %}
+        <h3>No Present Courses!</h3>
+        {% endif %}
+        {% for course in present_courses %}
+        <div class="my_course_card">
+            <div class="course_name">
+                <img src="/media/{{course.icon}}">
+                <div class="course_name_inner">
+                    <p class="course_code">{{course.code}}</p>
+                </div>
+            </div>
+            <div class="course_details">
+                <table>
+                    <tr>
+                        <td><i class="fa-solid fa-clock"></i> Slot: {{course.slot}}</td>
+                        <td><i class="fa-solid fa-book"></i> &nbsp;{{course.credits}} Credits</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa-solid fa-university"></i> {{course.department}}</td>
+                        <td><i class="fa-solid fa-users"></i> {{course.students.count}} Students</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="view_course">
+                <a href="/manage/{{course.semester_code}}-{{course.code}}">Manage Course</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="manage_courses">
+    <h2>Past Courses</h2>
+    <div class="scroll_bar">
+        {% if not past_courses %}
+        <h3>No Past Courses!</h3>
+        {% endif %}
+        {% for course in past_courses reversed %}
+        <div class="my_course_card">
+            <div class="course_name">
+                <img src="/media/{{course.icon}}">
+                <div class="course_name_inner">
+                    <p class="course_code">{{course.semester_code}}-{{course.code}}</p>
+                </div>
+            </div>
+            <div class="course_details">
+                <table>
+                    <tr>
+                        <td><i class="fa-solid fa-clock"></i> Slot: {{course.slot}}</td>
+                        <td><i class="fa-solid fa-book"></i> &nbsp;{{course.credits}} Credits</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa-solid fa-university"></i> {{course.department}}</td>
+                        <td><i class="fa-solid fa-users"></i> {{course.students.count}} Students</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="view_course">
+                <a href="/manage/{{course.semester_code}}-{{course.code}}">Manage Course</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock main %}

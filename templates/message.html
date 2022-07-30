@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/messages.css' %}">
+{% endblock head %}
+
+{% block title %}Messages{% endblock title %}
+
+{% block main %}
+<div id="student_nav">
+    <ul>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/courses">Courses</a></li>
+        <li><a href="/grades">Grades</a></li>
+        <li><a href="/assignments">Assignments</a></li>
+        <li><a href="/messages" class="active_student_nav">Messages</a></li>
+    </ul>
+    <a href="/logout" id="logout">Logout</a>
+</div>
+<p hidden="hidden" id="my_user_id">{{profile.id}}</p>
+<div id="student_dashboard">
+    <h1>Messages</h1>
+    <div id="messages_box">
+        <div id="user_list">
+            <input type="text" name="user_search" placeholder="Start a Conversation..." id="user_search">
+            {% for message in messages %}
+            {% if message.message_to == profile %}
+            {% if second_user == message.message_from %}
+            <div class="user_card selected_user" onclick="location.href='/messages/{{message.message_from.username}}'">
+                <div class="user_icon">
+                    {% if message.message_to == profile %}
+                    <img src="/media/{{message.message_from.image}}">
+                    {% else %}
+                    <img src="/media/{{message.message_to.image}}">
+                    {% endif %}
+                </div>
+                <div class="user_other">
+                    {% if message.message_to == profile %}
+                    <p class="user_name">{{message.message_from.name.split.0}}</p>
+                    {% else %}
+                    <p class="user_name">{{message.message_to.name.split.0}}</p>
+                    {% endif %}
+                    <p class="user_message" id="curr_user_bar">{{message.message|truncatechars:15}}</p>
+                </div>
+            </div>
+            {% else %}
+            <div class="user_card" onclick="location.href='/messages/{{message.message_from.username}}'">
+                <div class="user_icon">
+                    {% if message.message_to == profile %}
+                    <img src="/media/{{message.message_from.image}}">
+                    {% else %}
+                    <img src="/media/{{message.message_to.image}}">
+                    {% endif %}
+                </div>
+                <div class="user_other">
+                    {% if message.message_to == profile %}
+                    <p class="user_name">{{message.message_from.name.split.0}}</p>
+                    {% else %}
+                    <p class="user_name">{{message.message_to.name.split.0}}</p>
+                    {% endif %}
+                    <p class="user_message">{{message.message|truncatechars:15}}</p>
+                </div>
+            </div>
+            {% endif %}
+            {% else %}
+            {% if second_user == message.message_to  %}
+            <div class="user_card selected_user" onclick="location.href='/messages/{{message.message_to.username}}'">
+                <div class="user_icon">
+                    {% if message.message_to == profile %}
+                    <img src="/media/{{message.message_from.image}}">
+                    {% else %}
+                    <img src="/media/{{message.message_to.image}}">
+                    {% endif %}
+                </div>
+                <div class="user_other">
+                    {% if message.message_to == profile %}
+                    <p class="user_name">{{message.message_from.name.split.0}}</p>
+                    {% else %}
+                    <p class="user_name">{{message.message_to.name.split.0}}</p>
+                    {% endif %}
+                    <p class="user_message" id="curr_user_bar">{{message.message|truncatechars:15}}</p>
+                </div>
+            </div>
+            {% else %}
+            <div class="user_card" onclick="location.href='/messages/{{message.message_to.username}}'">
+                <div class="user_icon">
+                    {% if message.message_to == profile %}
+                    <img src="/media/{{message.message_from.image}}">
+                    {% else %}
+                    <img src="/media/{{message.message_to.image}}">
+                    {% endif %}
+                </div>
+                <div class="user_other">
+                    {% if message.message_to == profile %}
+                    <p class="user_name">{{message.message_from.name.split.0}}</p>
+                    {% else %}
+                    <p class="user_name">{{message.message_to.name.split.0}}</p>
+                    {% endif %}
+                    <p class="user_message">{{message.message|truncatechars:15}}</p>
+                </div>
+            </div>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div id="message_box">
+            <div id="top_bar">
+                <img src="/media/{{second_user.image}}">
+                <p>{{second_user.name}}</p>
+            </div>
+            <div id="messages">
+                {% for msg in chat %}
+                {% if msg.message_from == profile %}
+                <div class="sent_message">
+                    <div class="sent_message_inner">
+                        <p class="message">{{msg.message}}</p>
+                        <p class="time_stamp">{{msg.date_time|date:'d/m, g:i A'}}</p>
+                    </div>
+                </div>
+                {% else %}
+                <div class="received_message">    
+                    <div class="received_message_inner">
+                        <p class="message">{{msg.message}}</p>
+                        <p class="time_stamp">{{msg.date_time|date:'d/m, g:i A'}}</p>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            <div id="send_message">
+                <a href="mailto:{{second_user.email}}" class="send_message_icons"><i class="fa-solid fa-envelope"></i></a>
+                <p class="send_message_icons" onclick="alert('Available Soon!')"><i class="fa-solid fa-paperclip"></i></p>
+                <input type="text" placeholder="Type a message" id="message_input">
+                <p class="send_message_icons" onclick="send_message()"><i class="fa-solid fa-paper-plane"></i></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main %}
+
+{% block footer %}
+<script src="{% static 'js/messages.js' %}"></script>
+{% endblock footer %}

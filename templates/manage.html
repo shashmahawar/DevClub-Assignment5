@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/manage.css' %}">
+{% endblock head %}
+
+{% block title %}Courses - {{course.code}}{% endblock title %}
+
+{% block main %}
+<div id="student_dashboard">
+    <h1>{{course.code}} - {{course.name}}</h1>
+    <div id="dashboard_start">
+        <div id="main_dashboard">
+            <div id="course_info">
+                <table>
+                    <tr>
+                        <td><i class="fa-solid fa-clock"></i> Slot: {{course.slot}}</td>
+                        <td><i class="fa-solid fa-book"></i> &nbsp;{{course.credits}} Credits</td>
+                        <td><i class="fa-solid fa-database"></i> &nbsp;{{course.credit_structure}}</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa-solid fa-university"></i> {{course.department}}</td>
+                        <td><i class="fa-solid fa-users"></i> {{course.students.count}} Students</td>
+                        {% if course.prerequisite %}
+                        <td><i class="fa-solid fa-history"></i> {{course.prerequisite.code}}</td>
+                        {% else %}
+                        <td><i class="fa-solid fa-history"></i> None</td>
+                        {% endif %}
+                    </tr>
+                </table>
+            </div>
+            <a href="/media/{{course.course_intro}}" id="course_intro">Course Introduction</a>
+            <div id="course_updates">
+                <h3>Announcements</h3>
+                {% for announcement in announcements %}
+                <p><a href="/manage/{{course.semester_code}}-{{course.code}}/announcements" class="course_update">{{announcement.title}}: {{announcement.description|truncatewords:20}}</a></p>
+                {% endfor %}
+            </div>
+        </div>
+        <div id="side_menu">
+            <div id="course_nav">
+                <h2>Navigation</h2>
+                <p><a href="/manage/{{course.semester_code}}-{{course.code}}/announcements">Announcements</a></p>
+                <p><a href="/manage/{{course.semester_code}}-{{course.code}}/materials">Course Materials</a></p>
+                <p><a href="/manage/{{course.semester_code}}-{{course.code}}/assignments">Assignments</a></p>
+                <p><a href="/manage/{{course.semester_code}}-{{course.code}}/submissions">Submissions</a></p>
+                <p><a href="/manage/{{course.semester_code}}-{{course.code}}/grades">Grades</a></p>
+                <p><a href="/manage/{{course.semester_code}}-{{course.code}}/participants">Participants</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main %}

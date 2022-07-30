@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/announcements.css' %}">
+{% endblock head %}
+
+{% block title %}Announcements{% endblock title %}
+
+{% block main %}
+<div id="student_nav">
+    <ul>
+        <li><a href="/dashboard" class="active_student_nav">Dashboard</a></li>
+        <li><a href="/courses">Courses</a></li>
+        <li><a href="/grades">Grades</a></li>
+        <li><a href="/assignments">Assignments</a></li>
+        <li><a href="/messages">Messages</a></li>
+    </ul>
+    <a href="/logout" id="logout">Logout</a>
+</div>
+<div id="student_dashboard">
+    <h1>Announcements</h1>
+    <div id="dashboard_start">
+        <div id="main_dashboard">
+            {% for announcement in announcements reversed %}
+            <div class="announcement_card">
+                <h2>{{announcement.course.code}} - {{announcement.title}}</h2>
+                <p>{{announcement.description}}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock main %}

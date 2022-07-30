@@ -1,0 +1,50 @@
+#student_dashboard {
+    padding: 7%;
+}
+
+#student_dashboard h1 {
+    font-weight: 500;
+    font-size: 2rem;
+}
+
+#dashboard_start {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3vh;
+}
+
+#main_dashboard {
+    width: 85%;
+}
+
+.participant tr td {
+    width: 40%;
+    padding-bottom: 1vh;
+}
+
+.participant tr td a {
+    color: black;
+}
+
+.participant tr:hover {
+    font-weight: 600 !important;
+}
+
+#green_row {
+    color: #00758F;
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+form {
+    padding: 3%;
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+}
+
+form h2 {
+    font-weight: 500;
+    font-size: 1rem;
+    color: #00758F;
+}

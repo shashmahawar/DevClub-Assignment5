@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/courses.css' %}">
+{% endblock head %}
+
+{% block title %}Courses{% endblock title %}
+
+{% block main %}
+<div id="student_nav">
+    <ul>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/courses" class="active_student_nav">Courses</a></li>
+        <li><a href="/grades">Grades</a></li>
+        <li><a href="/assignments">Assignments</a></li>
+        <li><a href="/messages">Messages</a></li>
+    </ul>
+    <a href="/logout" id="logout">Logout</a>
+</div>
+<div id="student_dashboard">
+    <h1>My Courses</h1>
+    <div id="course_cards">
+        {% for course in courses %}
+        <div class="my_course_card">
+            <div class="course_name">
+                <img src="/media/{{course.icon}}">
+                <div class="course_name_inner">
+                    <p class="course_code">{{course.code}}</p>
+                    <p class="course_prof"><i class="fa-solid fa-user"></i> {{course.coordinators.name}}</p>
+                </div>
+            </div>
+            <div class="course_details">
+                <table>
+                    <tr>
+                        <td><i class="fa-solid fa-clock"></i> Slot: {{course.slot}}</td>
+                        <td><i class="fa-solid fa-book"></i> &nbsp;{{course.credits}} Credits</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa-solid fa-university"></i> {{course.department}}</td>
+                        <td><i class="fa-solid fa-users"></i> {{course.students.count}} Students</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="view_course">
+                <a href="/courses/{{course.code}}">View Course</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <button id="view_past_courses" onclick="location.href='courses/past'">View Past Courses</button>
+</div>
+{% endblock main %}
+
+{% block footer %}{% endblock footer %}

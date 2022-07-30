@@ -1,0 +1,74 @@
+h1 {
+    font-weight: 600;
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 14vh;
+}
+
+#message {
+    color: red;
+    text-align: center;
+    margin-top: 5vh;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: max(300px,27.7%);
+    margin-top: 5vh;
+}
+
+.login_input {
+    width: 90%;
+    margin: auto;
+}
+
+.login_input p {
+    font-weight: 400;
+    font-size: 1rem;
+    margin-bottom: 0.8vh;
+}
+
+.login_input input {
+    width: 90%;
+    display: flex;
+    margin: auto;
+    border: 1px solid #D9D9D9;
+    border-radius: 10px;
+    height: 3vh;
+    padding: 0.3rem 1rem;
+    font-size: 0.9rem;
+    margin-bottom: 3vh;
+}
+
+.login_input_2 {
+    display: flex;
+    justify-content: space-between;
+    width: 180px;
+    margin: auto;
+    align-items: center;
+    margin-bottom: 3vh;
+    font-size: 0.9rem;
+}
+
+.login_input_2 input {
+    cursor: pointer;
+}
+
+form button {
+    width: 89%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    height: 3vh;
+    padding: 1.1rem 1rem;
+    border: none;
+    background-color: rgba(0,0,0,0.8);
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+}

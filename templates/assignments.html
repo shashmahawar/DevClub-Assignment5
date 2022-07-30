@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/assignments.css' %}">
+{% endblock head %}
+
+{% block title %}Assignments{% endblock title %}
+
+{% block main %}
+<div id="student_nav">
+    <ul>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/courses">Courses</a></li>
+        <li><a href="/grades">Grades</a></li>
+        <li><a href="/assignments" class="active_student_nav">Assignments</a></li>
+        <li><a href="/messages">Messages</a></li>
+    </ul>
+    <a href="/logout" id="logout">Logout</a>
+</div>
+<div id="student_dashboard">
+    <h1>Assignments</h1>
+    {% if past_assignments %}
+    <div class="assignment_cat">
+        <h2>Due Recently</h2>
+        <table>
+            <tr class="green_row">
+                <td class="grade_div_1">Name</td>
+                <td class="grade_div_2">Course</td>
+                <td class="grade_div_2">Was Due</td>
+            </tr>
+            {% for past_assignment in past_assignments %}
+            <tr>
+                <td class="grade_div_1"><a href="/assignments/{{past_assignment.course.code}}/{{past_assignment.name}}">{{past_assignment.name}}</a></td>
+                <td class="grade_div_2">{{past_assignment.course.code}}</td>
+                <td class="grade_div_2">{{past_assignment.due_date|naturaltime}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+    {% if upcoming_assignments %}
+    <div class="assignment_cat">
+        <h2>Upcoming</h2>
+        <table>
+            <tr class="green_row">
+                <td class="grade_div_1">Name</td>
+                <td class="grade_div_2">Course</td>
+                <td class="grade_div_2">Due In</td>
+            </tr>
+            {% for upcoming_assignment in upcoming_assignments %}
+            <tr>
+                <td class="grade_div_1"><a href="/assignments/{{upcoming_assignment.course.code}}/{{upcoming_assignment.name}}">{{upcoming_assignment.name}}</a></td>
+                <td class="grade_div_2">{{upcoming_assignment.course.code}}</td>
+                <td class="grade_div_2">{{upcoming_assignment.due_date|naturaltime}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+</div>
+{% endblock main %}
+
+{% block footer %}{% endblock footer %}

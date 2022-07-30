@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/edit_assignment.css' %}">
+{% endblock head %}
+
+{% block title %}Edit Assignment{% endblock title %}
+
+{% block main %}
+<div id="student_dashboard">
+    <h1>Edit Assignment</h1>
+    <div id="dashboard_start">
+        <div id="main_dashboard">
+            <form action="/manage/{{course.semester_code}}-{{course.code}}/assignments/{{assignment.id}}/edit" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <p>Name :</p>
+                <input type="text" name="name" value="{{assignment.name}}" placeholder="Name" required>
+                <p>Max. Marks :</p>
+                <input type="number" name="max_marks" value="{{assignment.max_marks}}" required>
+                <p>Content :</p>
+                <textarea name="content" placeholder="Content" required>{{assignment.content}}</textarea>
+                <p>File :</p>
+                <input type="file" name="assignment" value="{{assignment.assignment}}">
+                <p>Due Date :</p>
+                <input type="date" name="due_date" value="{{assignment.due_date|date:'Y-m-d'}}" required>
+                <input type="time" name="due_time" value="{{assignment.due_date|date:'H:i'}}" required>
+                <p>Contribution :</p>
+                <input type="number" name="contribution" value="{{assignment.contribution}}" required>
+                <p>Publish Grades :</p>
+                {% if assignment.publish_grades %}
+                <input type="checkbox" name="publish_grades" checked>
+                {% else %}
+                <input type="checkbox" name="publish_grades">
+                {% endif %}
+                <button type="submit">Save</button>
+            </form>
+            <button style="margin-top: 2vh;" onclick="location.href='/manage/{{course.semester_code}}-{{course.code}}/assignments/{{assignment.id}}/delete'">Delete</button>
+        </div>
+    </div>
+</div>
+{% endblock main %}

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/grades.css' %}">
+{% endblock head %}
+
+{% block title %}Grades{% endblock title %}
+
+{% block main %}
+<div id="student_nav">
+    <ul>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/courses">Courses</a></li>
+        <li><a href="/grades" class="active_student_nav">Grades</a></li>
+        <li><a href="/assignments">Assignments</a></li>
+        <li><a href="/messages">Messages</a></li>
+    </ul>
+    <a href="/logout" id="logout">Logout</a>
+</div>
+<div id="student_dashboard">
+    <h1>Grades</h1>
+    {% for semester in semesters %}
+    <div class="semester_grades">
+        <h2>Semester {{semester.number}}</h2>
+        <table>
+            <tr class="green_row">
+                <td class="grade_div_1">Course</td>
+                <td class="grade_div_2">Grade</td>
+                <td class="grade_div_2">Credits</td>
+            </tr>
+            {% for course in semester.courses.all %}
+            {% if course.publish_grades %}
+            <tr>
+                <td class="grade_div_1">{{course.code}} - {{course.name}}</td>
+                {% for grade in grades %}
+                {% if grade.course.code == course.code %}
+                <td class="grade_div_2">{{grade.grade}}</td>
+                {% endif %}
+                {% endfor %}
+                <td class="grade_div_2">{{course.credits}}</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+            <tr class="green_row">
+                <td class="grade_div_1">Total</td>
+                <td class="grade_div_2"></td>
+                <td class="grade_div_2">{{semester.credits}}</td>
+            </tr>
+        </table>
+        <div class="grade_points">
+            <div style="margin-right: 2vw;">
+                <span class="text_head">SGPA:</span>
+                <span class="text_body">{{semester.sgpa}}</span>
+            </div>
+            <div>
+                <span class="text_head">CGPA:</span>
+                <span class="text_body">{{semester.cgpa}}</span>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock main %}
+
+{% block footer %}{% endblock footer %}

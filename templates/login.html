@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock head %}
+
+{% block title %}Login{% endblock title %}
+
+{% block main %}
+<h1>Login</h1>
+<p id="message">{{message}}</p>
+<form action="login" method="post" onsubmit="checkSave()">
+    {% csrf_token %}
+    <div class="login_input">
+        <p>Username</p>
+        <input type="text" name="username" id="username" required>
+    </div>
+    <div class="login_input">
+        <p>Password</p>
+        <input type="password" name="password" id="password" required>
+    </div>
+    <div class="login_input_2">
+        <input type="checkbox" name="save_username" id="remember">
+        <p>Remember Username</p>
+    </div>
+    <button type="submit">Login</button>
+</form>
+{% endblock main %}
+
+{% block footer %}
+<script src="{% static 'js/login.js' %}"></script>
+{% endblock footer %}

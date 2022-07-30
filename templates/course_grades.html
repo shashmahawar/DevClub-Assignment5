@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/course_grades.css' %}">
+{% endblock head %}
+
+{% block title %}Grades - {{course.code}}{% endblock title %}
+
+{% block main %}
+<div id="student_nav">
+    <ul>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/courses">Courses</a></li>
+        <li><a href="/grades" class="active_student_nav">Grades</a></li>
+        <li><a href="/assignments">Assignments</a></li>
+        <li><a href="/messages">Messages</a></li>
+    </ul>
+    <a href="/logout" id="logout">Logout</a>
+</div>
+<div id="student_dashboard">
+    <h1>{{course.code}} - Grades</h1>
+    <div id="grades">
+        <table>
+            <tr class="green_row">
+                <td class="grade_div_1">Grade Item</td>
+                <td class="grade_div_2">Your Score</td>
+                <td class="grade_div_2">Max. Marks</td>
+                <td class="grade_div_2">Average</td>
+                <td class="grade_div_2">Contribution</td>
+            </tr>
+            {% for grade in grades %}
+            <tr>
+                <td class="grade_div_1"><a href="/assignments/{{course.code}}/{{grade.assignment.name}}">{{grade.assignment.name}}</a></td>
+                <td class="grade_div_2">{{grade.marks}}</td>
+                <td class="grade_div_2">{{grade.assignment.max_marks}}</td>
+                <td class="grade_div_2">NaN</td>
+                <td class="grade_div_2">{{grade.assignment.contribution}}%</td>
+            </tr>
+            {% endfor %}
+            <tr class="green_row">
+                <td class="grade_div_1">Course Total</td>
+                <td class="grade_div_2">100.00</td>
+                <td class="grade_div_2">100.00</td>
+                <td class="grade_div_2">100.00</td>
+                <td class="grade_div_2"></td>
+            </tr>
+        </table>
+        <div id="final_grade">
+            <div>
+                <span class="text_head">FINAL GRADE:</span>
+                <span class="text_body">{{fin_grade}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main %}
+
+{% block footer %}{% endblock footer %}

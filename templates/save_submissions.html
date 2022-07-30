@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/save_submissions.css' %}">
+{% endblock head %}
+
+{% block title %}Submissions - {{course.code}}{% endblock title %}
+
+{% block main %}
+<div id="student_dashboard">
+    <h1>{{course.code}} - {{assignment.name}} Submissions</h1>
+    <div id="dashboard_start">
+        <div id="main_dashboard">
+            <table class="participant">
+                <tr>
+                    <td>Name</td>
+                    <td>{{student.name}}</td>
+                </tr>
+                <tr>
+                    <td>Submission</td>
+                    <td><a href="/media/{{submission.submission}}" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>
+                </tr>
+                <tr>
+                    <td>Marks</td>
+                    <td>
+                        <form action="/manage/{{course.semester_code}}-{{course.code}}/submissions/{{assignment.id}}/{{student.username}}" method="post">
+                            {% csrf_token %}
+                            <input type="number" name="marks" placeholder="Marks" value="{{marks}}">
+                            <button>Save</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock main %}

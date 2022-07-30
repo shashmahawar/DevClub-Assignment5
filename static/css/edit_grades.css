@@ -1,0 +1,51 @@
+#student_dashboard {
+    padding: 7%;
+}
+
+#student_dashboard h1 {
+    font-weight: 500;
+    font-size: 2rem;
+}
+
+#dashboard_start {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3vh;
+}
+
+#main_dashboard {
+    width: 85%;
+}
+
+.participant tr td {
+    width: 40%;
+    padding-bottom: 5vh;
+}
+
+.participant tr td a {
+    color: black;
+}
+
+#green_row {
+    color: #00758F;
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+input {
+    padding: 0.7rem 1rem;
+    width: 30%;
+    font-size: 0.9rem;
+    border: 1px solid #00758F;
+    border-radius: 10px;
+}
+
+button {
+    padding: 0.7rem 1rem;
+    background-color: #00758F;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+}

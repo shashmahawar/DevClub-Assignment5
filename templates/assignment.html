@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/assignment.css' %}">
+{% endblock head %}
+
+{% block title %}{{assignment.name}} - {{assignment.course.code}}{% endblock title %}
+
+{% block main %}
+<div id="student_nav">
+    <ul>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/courses">Courses</a></li>
+        <li><a href="/grades">Grades</a></li>
+        <li><a href="/assignments" class="active_student_nav">Assignments</a></li>
+        <li><a href="/messages">Messages</a></li>
+    </ul>
+    <a href="/logout" id="logout">Logout</a>
+</div>
+<div id="student_dashboard">
+    <h1>{{assignment.course.code}} - {{assignment.course.name}}</h1>
+    <div class="assignment_box">
+        <h2>{{assignment.name}}</h2>
+        <p class="assignment_text">{{assignment.content}}</p>
+        {% if assignment.assignment %}
+        <div id="download_files">
+            <a href="/media/{{assignment.assignment}}" class="file_box" download>
+                <p>Assignment File <i class="fa-solid fa-download"></i></p>
+            </a>
+        </div>
+        {% endif %}
+        <div id="details">
+            {% if submitted %}
+            <p>Status: Submitted</p>
+            {% else %}
+            <p>Status: Not Submitted</p>
+            {% endif %}
+            <p>Due: {{assignment.due_date|date:'F d, Y, g:i A'}}</p>
+            <p>Max. Marks: {{assignment.max_marks}}</p>
+            {% if assignment.publish_grades %}
+            <p>Your Marks: {{marks}}</p>
+            {% endif %}
+        </div>
+        {% if not submitted and not late %}
+        <div id="submission">
+            <p id="submit_text">No File Uploaded</p>
+            <form action="/assignments/{{assignment.course.code}}/{{assignment.name}}" method="post" enctype="multipart/form-data"> 
+                {% csrf_token %}
+                <input type="file" id="upload" name="submission" hidden="hidden" onchange="nameChange()" required>
+                <button id="upload_btn" onclick="submitButton()"><i class="fa-solid fa-upload"></i>&nbsp; Upload Files</button>
+                <button id="submit_btn" type="submit" onclick="checkUpload()">Submit</button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock main %}
+
+{% block footer %}
+<script>
+    function submitButton() {
+        var button = document.getElementById("upload");
+        button.click()
+    }
+    function nameChange() {
+        var button = document.getElementById("upload");
+        var text = document.getElementById("submit_text");
+        if (button.value) {
+            text.innerText = button.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+        } else {
+            text.innerText = "No File Uploaded";
+        }
+    }
+    function checkUpload() {
+        var button = document.getElementById("upload");
+        if (!button.value) {
+            alert("Please upload a file!");
+        }
+    }
+</script>
+{% endblock footer %}

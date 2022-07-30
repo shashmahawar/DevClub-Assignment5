@@ -1,0 +1,48 @@
+#student_dashboard {
+    padding: 7%;
+}
+
+#student_dashboard h1 {
+    font-weight: 500;
+    font-size: 2rem;
+}
+
+#dashboard_start {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3vh;
+}
+
+#main_dashboard {
+    width: 85%;
+}
+
+input, textarea {
+    width: 90%;
+    border: 1px solid #00758F;
+    padding: 1rem 1rem;
+    resize: none;
+    font-size: 1rem;
+    margin-bottom: 3vh;
+}
+
+textarea {
+    height: 20vh;
+}
+
+p {
+    margin-bottom: 1vh;
+    font-weight: 600;
+}
+
+button {
+    width: 20%;
+    background-color: #00758F;
+    color: white;
+    font-weight: 500;
+    font-size: 1.3rem;
+    padding: 1rem 1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}

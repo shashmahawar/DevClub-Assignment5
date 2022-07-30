@@ -1,0 +1,25 @@
+#student_dashboard {
+    padding: 7%;
+}
+
+#student_dashboard h1 {
+    font-weight: 500;
+    font-size: 2rem;
+    margin-bottom: 1vh;
+}
+
+.assignment_cat {
+    margin-left: 3%;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    position: relative;
+}
+
+.assignment_cat ul li {
+    margin-bottom: 2vh;
+}
+
+.assignment_cat ul li a {
+    color: #00758F;
+    font-size: 1.2rem;
+}

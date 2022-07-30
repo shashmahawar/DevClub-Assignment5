@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/manage_grades.css' %}">
+{% endblock head %}
+
+{% block title %}Grades - {{course.code}}{% endblock title %}
+
+{% block main %}
+<div id="student_dashboard">
+    <h1>{{course.code}} - Grades</h1>
+    <form action="/manage/{{course.semester_code}}-{{course.code}}/grades" method="post" enctype="multipart/form-data">
+        <h2>Upload Grades via CSV</h2>
+        {% csrf_token %}
+        <input type="file" name="csv_file" accept=".csv" />
+        <button type="submit">Submit</button>
+    </form>
+    <div id="dashboard_start">
+        <div id="main_dashboard">
+            <table class="participant">
+                <tr id="green_row">
+                    <td>Name</td>
+                    <td>Username</td>
+                    <td>Grade</td>
+                    <td>Edit</td>
+                </tr>
+                {% for grade in grades %}
+                <tr>
+                    <td>{{grade.name}}</td>
+                    <td>{{grade.username}}</td>
+                    <td>{{ grades|get_item:grade }}</td>
+                    <td><a href="/manage/{{course.semester_code}}-{{course.code}}/grades/{{grade.username}}/edit">Edit</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock main %}

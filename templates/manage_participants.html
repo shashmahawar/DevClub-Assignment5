@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/manage_participants.css' %}">
+{% endblock head %}
+
+{% block title %}Participants - {{course.code}}{% endblock title %}
+
+{% block main %}
+<div id="student_dashboard">
+    <h1>{{course.code}} - Participants</h1>
+    <div id="dashboard_start">
+        <div id="main_dashboard">
+            <table class="participant">
+                <tr id="green_row">
+                    <td>Name</td>
+                    <td>Role</td>
+                    <td>Email</td>
+                </tr>
+                {% for participant in participants %}
+                <tr>
+                    <td>{{participant.name}}</td>
+                    <td>{{participant.userType}}</td>
+                    <td><a href="mailto:{{participant.email}}">{{participant.email}}</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock main %}

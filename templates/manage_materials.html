@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/manage_materials.css' %}">
+{% endblock head %}
+
+{% block title %}{{course.code}} - Course Materials{% endblock title %}
+
+{% block main %}
+<div id="student_dashboard">
+    <h1>{{course.code}} - Course Materials</h1>
+    <a href="/manage/{{course.semester_code}}-{{course.code}}/materials/add">+ Add</a>
+    <div id="dashboard_start">
+        <div id="main_dashboard">
+            {% for material in materials reversed %}
+            <div class="material_card">
+                <h2>{{material.title}}</h2>
+                <div id="download_files">
+                    <a href="/media/{{material.material}}" class="file_box" download>
+                        <p>Download File <i class="fa-solid fa-download"></i></p>
+                    </a>
+                </div>
+                <div class="manage_buttons">
+                    <a href="/manage/{{course.semester_code}}-{{course.code}}/materials/{{material.id}}/delete">Delete</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock main %}
+
+{% block footer %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3/dist/chart.min.js"></script>
+<script src="{% static 'js/dashboard.js' %}"></script>
+{% endblock footer %}

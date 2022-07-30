@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/messages.css' %}">
+{% endblock head %}
+
+{% block title %}Messages{% endblock title %}
+
+{% block main %}
+<div id="student_nav">
+    <ul>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/courses">Courses</a></li>
+        <li><a href="/grades">Grades</a></li>
+        <li><a href="/assignments">Assignments</a></li>
+        <li><a href="/messages" class="active_student_nav">Messages</a></li>
+    </ul>
+    <a href="/logout" id="logout">Logout</a>
+</div>
+<div id="student_dashboard">
+    <h1>Messages</h1>
+    <div id="messages_box">
+        <div id="user_list">
+            <input type="text" name="user_search" placeholder="Start a Conversation..." id="user_search" disabled>
+            {% for message in messages %}
+            <!-- selected_user -->
+            {% if message.message_to == profile %}
+            <div class="user_card" onclick="location.href='/messages/{{message.message_from.username}}'">
+            {% else %}
+            <div class="user_card" onclick="location.href='/messages/{{message.message_to.username}}'">
+            {% endif %}
+                <div class="user_icon">
+                    {% if message.message_to == profile %}
+                    <img src="/media/{{message.message_from.image}}">
+                    {% else %}
+                    <img src="/media/{{message.message_to.image}}">
+                    {% endif %}
+                </div>
+                <div class="user_other">
+                    {% if message.message_to == profile %}
+                    <p class="user_name">{{message.message_from.name.split.0}}</p>
+                    {% else %}
+                    <p class="user_name">{{message.message_to.name.split.0}}</p>
+                    {% endif %}
+                    <p class="user_message">{{message.message|truncatechars:15}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div id="message_box">
+            <div id="top_bar">
+                
+            </div>
+            <div id="messages">
+                No one's around 👀
+            </div>
+            <div id="send_message">
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main %}
+
+{% block footer %}
+<script src="{% static 'js/messages.js' %}"></script>
+{% endblock footer %}

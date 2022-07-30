@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/manage_submissions.css' %}">
+{% endblock head %}
+
+{% block title %}Submissions - {{course.code}}{% endblock title %}
+
+{% block main %}
+<div id="student_dashboard">
+    <h1>{{course.code}} - Submissions</h1>
+    <div class="assignment_cat">
+        <ul>
+            {% for assignment in assignments reversed %}
+            <li><a href="/manage/{{course.semester_code}}-{{course.code}}/submissions/{{assignment.id}}">{{assignment.name}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock main %}
+
+{% block footer %}{% endblock footer %}

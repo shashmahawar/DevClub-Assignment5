@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/upload_submissions.css' %}">
+{% endblock head %}
+
+{% block title %}Submissions - {{course.code}}{% endblock title %}
+
+{% block main %}
+<div id="student_dashboard">
+    <h1>{{course.code}} - {{assignment.name}} Submissions</h1>
+    <div id="dashboard_start">
+        <div id="main_dashboard">
+            <h3>Ungraded</h3>
+            {% for submission in submissions %}
+            {% if not grades|get_item:submission.student.username %}
+            <li><a href="/manage/{{course.semester_code}}-{{course.code}}/submissions/{{assignment.id}}/{{submission.student.username}}">{{submission.student.name}}</a></li>
+            {% endif %}
+            {% endfor %}
+            <h3>Graded</h3>
+            {% for submission in submissions %}
+            {% if grades|get_item:submission.student.username %}
+            <li><a href="/manage/{{course.semester_code}}-{{course.code}}/submissions/{{assignment.id}}/{{submission.student.username}}">{{submission.student.name}}</a></li>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock main %}
+
+{% block footer %}
+<script>
+    function save_marks(param) {
+        console.log(param.parentElement.parentElement.innerHTML);
+    }
+</script>
+{% endblock footer %}

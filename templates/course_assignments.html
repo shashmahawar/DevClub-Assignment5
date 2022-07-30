@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/course_assignments.css' %}">
+{% endblock head %}
+
+{% block title %}Assignments - {{course.code}}{% endblock title %}
+
+{% block main %}
+<div id="student_nav">
+    <ul>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/courses">Courses</a></li>
+        <li><a href="/grades">Grades</a></li>
+        <li><a href="/assignments" class="active_student_nav">Assignments</a></li>
+        <li><a href="/messages">Messages</a></li>
+    </ul>
+    <a href="/logout" id="logout">Logout</a>
+</div>
+<div id="student_dashboard">
+    <h1>{{course.code}} - Assignments</h1>
+    <div class="assignment_cat">
+        <table>
+            <tr class="green_row">
+                <td class="grade_div_1">Name</td>
+                <td class="grade_div_2">Status</td>
+                <td class="grade_div_1">Due Date</td>
+            </tr>
+            {% for assignment in assignments reversed %}
+            <tr>
+                <td class="grade_div_1"><a href="/assignments/{{course.code}}/{{assignment.name}}">{{assignment.name}}</a></td>
+                <td class="grade_div_2">Not Submitted</td>
+                <td class="grade_div_1">{{assignment.due_date|date:'F d, Y, g:i A'}}</td>
+            </tr>
+            {% endfor %}
+            {% for submission in submissions reversed %}
+            <tr>
+                <td class="grade_div_1"><a href="/assignments/{{course.code}}/{{submission.assignment.name}}">{{submission.assignment.name}}</a></td>
+                <td class="grade_div_2">Submitted</td>
+                <td class="grade_div_1">{{submission.assignment.due_date|date:'F d, Y, g:i A'}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock main %}
+
+{% block footer %}{% endblock footer %}

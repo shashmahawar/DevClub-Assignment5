@@ -1,0 +1,33 @@
+#student_dashboard {
+    padding: 7%;
+}
+
+#student_dashboard h1 {
+    font-weight: 500;
+    font-size: 2rem;
+}
+
+#dashboard_start {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3vh;
+}
+
+#main_dashboard {
+    width: 85%;
+}
+
+.participant tr td {
+    width: 50%;
+    padding-bottom: 1vh;
+}
+
+.participant tr td a {
+    color: black;
+}
+
+#green_row {
+    color: #00758F;
+    font-weight: 500;
+    font-size: 1.2rem;
+}

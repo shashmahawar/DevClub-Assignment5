@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/add_announcement.css' %}">
+{% endblock head %}
+
+{% block title %}Add Announcement{% endblock title %}
+
+{% block main %}
+<div id="student_dashboard">
+    <h1>Add Announcement</h1>
+    <div id="dashboard_start">
+        <div id="main_dashboard">
+            <form action="/manage/{{course.semester_code}}-{{course.code}}/announcements/add" method="post">
+                {% csrf_token %}
+                <p>Title :</p>
+                <input type="text" name="title" placeholder="Title" required>
+                <p>Announcement :</p>
+                <textarea name="description" placeholder="Announcement" required></textarea>
+                <button type="submit">Add</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock main %}

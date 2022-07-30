@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="shortcut icon" href="{% static 'img/favicon.png' %}">
+    {% block head %}{% endblock head %}
+    <script src="https://kit.fontawesome.com/ecd2b347fc.js" crossorigin="anonymous"></script>
+    <title>{% block title %}{% endblock title %} | DevClubLMS</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div id="navbar">
+                <div id="nav_logo" onclick="location.href='/'">
+                    DevClubLMS
+                </div>
+                <div id="nav_content">
+                    {% if user.is_authenticated %}
+                    <div id="nav_content_user">
+                        <img src="/media/{{profile.image}}" onclick="process_logout()">
+                    </div>
+                    {% else %}
+                    <p>You are not logged in.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        {% block main %}{% endblock main %}
+    </main>
+    <footer>
+        &copy; 2022 Copyright: Shashank Mahawar
+    </footer>
+    <script>
+        function process_logout() {
+            if (confirm("Are you sure you want to Logout?") == true) {
+                location.href='/logout';
+            }
+        }
+    </script>
+    {% block footer %}{% endblock footer %}
+</body>
+</html>
